@@ -1,0 +1,120 @@
+/*background color #ff8a00, #e52e71 */
+html{
+    height: 100%;
+}
+body{
+    font-family: 'Roboto Mono', monospace;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* height %는 부모 엘리먼트의 크기를 따라간다.*/
+    min-height: 100vh; /*부모엘리먼트의 크기를 따라간다.*/
+    background-image: linear-gradient(135deg, #e52e71, #ff8a00);
+}
+a{
+    text-decoration: none;
+}
+h1, div, p{
+    margin: 0;
+    padding: 0;
+}
+header{
+    position: relative;
+    width: 95%;
+    height: 15vh;
+    margin: 0 auto;
+}
+#weather-container{
+    width: 250px;
+    height: 12vh;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.menu-bar-container{
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0; /*ul에 마진이 있어서 공간이 생겨서 마진0으로 설정해줌*/
+}
+.menu-bar{
+    list-style-type: none;
+    padding: 0px 0px 0px 20px;
+    font-size: 25px;
+    color: white;
+    display: inline-block;
+    /* 이것은 텍스트에 그라디언트 칼라를 집어넣은것이다 */
+    background: linear-gradient(to right, rgb(95, 215, 255), rgb(255, 121, 206));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hr-container{
+    display: flex;
+    width: 100%;
+    height: 10vh;
+}
+.hr-container hr{ /*이놈이 자꾸 정가운데 정렬이 안되서 .hr-container display:flex 했더니 됐다!!! 부모자식간에 hr정렬할떄 써야겠따*/
+    width: 80%;
+    /* height를 안주고 배경색을 지정하면 적용이 안된다 */
+    height: 1px; 
+    /* 보더를 논해도되고 안해도 되는데 해라 */
+    border: none;
+    margin: auto;
+    background-image: linear-gradient(to right, purple 0%, green 50%, red 100%)
+}
+#about{
+    margin: auto;
+    width: 95%;
+    height: 60vh;
+    filter: blur(3px);
+    background-color: rgba(0,0,0,0.2);
+}
+
+/* javascript 템플릿문법 css 속성 적용 */
+.weather-box-blur{
+    position: absolute;
+    width: 250px;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+    filter: blur(2px);
+}
+.weather-box-left, .weather-box-right{
+    width: 125px;
+    height: 100%;
+    float: left;
+}
+.weather-box-left{
+    position: relative;
+}
+.weather-box-left > p{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.weather-box-right-aboveBox{
+    position:relative;
+    width: 100%;
+    height: 40%;
+    background-color: lightblue;
+}
+.weather-box-right-aboveBox > span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+.weather-box-right-underBox{
+    width: 100%;
+    height: 60%;
+    background-color: white;
+    font-size: 14px;
+    display: flex;
+}
+.weather-box-right-underBox > span{
+    justify-content: space-between;
+}

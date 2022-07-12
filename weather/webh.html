@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./webc.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <div id="weather-container">
+
+        </div>
+        <ul class="menu-bar-container">
+            <a href="#about"><li class="menu-bar">about</li></a>
+            <a href="#"><li class="menu-bar">mylife</li></a>
+            <a href="#"><li class="menu-bar">portfolio</li></a>
+        </ul>
+    </header>
+    <div class="hr-container">
+        <hr>
+    </div>
+    <div id="about">
+
+    </div>
+    <script>
+        var date = new Date();
+        let bDate, bTime, nx, ny;
+        let getCoordinate = prompt("좌표를 입력해주세요 x, y");
+
+        function getFullYear(value){
+            let isUnder;
+            if(value == "year"){
+                let year = String(date.getFullYear());
+                return year;
+
+            }else if(value == "month"){//month는 한달씩 늦게 나오므로 +1해줘야한다.
+                let month = date.getMonth() + 1;
+                isUnder = month < 10 ? "0" + month : month;
+                return String(isUnder);
+
+            }else if(value == "date"){
+                let dating = date.getDate();
+                isUnder = dating < 10 ? "0" + dating : dating;
+                return String(isUnder);
+
+            }else if(value == "hour"){
+                let hour = date.getHours(); //10 22
+                let min = date.getMinutes();
+
+                if(hour < 10){
+                    if(min < 40){
+                        return String("0" + hour-1 + "00");
+                    }else{
+                        return String("0" + hour + "00");
+                    }
+                    
+                }else{
+                    if(min < 40){
+                        return String(hour-1 + "00");
+                    }else{
+                        return String(hour + "00");
+                    }
+                }
+            }
+        }
+        
+        bDate = getFullYear("year") + getFullYear("month") + getFullYear("date");
+        bTime = getFullYear("hour");
+        console.log(bTime);
+        nx = String(getCoordinate.split(',')[0]);
+        ny = String(getCoordinate.split(',')[1]);
+
+        var xhr = new XMLHttpRequest();
+        //원형 url, key원형
+        
+        
+        var url3 = url + 'getVilageFcst' //초단기실황조회
+        var key3 = key;
+        key3 += "&" + encodeURIComponent('numOfRows') + '=' + encodeURIComponent(14);
+        key3 += "&" + encodeURIComponent('pageNo') + '=' + encodeURIComponent(1);
+        key3 += "&" + encodeURIComponent('dataType') + '=' + encodeURIComponent('XML');
+        key3 += "&" + encodeURIComponent('base_date') + '=' + encodeURIComponent(bDate);
+        key3 += "&" + encodeURIComponent('base_time') + '=' + encodeURIComponent('1700');
+        //인천 계양구 계산4동
+        key3 += "&" + encodeURIComponent('nx') + '=' + encodeURIComponent(nx);
+        key3 += "&" + encodeURIComponent('ny') + '=' + encodeURIComponent(ny);
+
+        xhr.onreadystatechange = function () { //?
+
+            if (this.readyState == 4 && this.status == 200) {
+                func(this.responseXML);
+            }
+        }
+        xhr.open('GET', url3 + key3, true);
+        xhr.send('');
+        
+        const category = {
+            POP: ['강수확률',"undefined"],
+            PTY: ['강수형태',"undefined"],
+            PCP: ['1시간 강수량',"undefined"],
+            REH: ['습도',"undefined"],
+            SNO: ['1시간 신적설', "undefined"],
+            SKY: ['하늘상태', "undefined"],
+            TMP: ['1시간 기온', "undefined"],
+            TMN: ['일 최저기온', "undefined"],
+            TMX: ['일 최고기온', "undefined"],
+            UUU: ['풍속(동서성분)', "undefined"],
+            VVV: ['풍속(남북성분)', "undefined"],
+            WAV: ['파고', "undefined"],
+            VEC: ['풍향', "undefined"],
+            WSD: ['풍속', "undefined"],
+        }
+
+
+        var addCategory = function (ct, value) {
+            category[ct][1] = value;// 전역에 있는 카테고리리설트를 쓴다.
+        }
+        var getHeadCount = function(name){
+            return Object.keys(name).length;
+        }
+        
+        function func(xmlDOM) {
+            console.log("함수 안 실행")
+            let item = xmlDOM.getElementsByTagName('item');
+
+            for (let i = 0; i < getHeadCount(category); i++) {
+
+                let ct = xmlDOM.getElementsByTagName('category')[i].childNodes[0].nodeValue;//category
+                let fcstValue = xmlDOM.getElementsByTagName('fcstValue')[i].childNodes[0].nodeValue;//fcV
+
+                addCategory(ct, fcstValue);
+            }
+            console.log("함수 안 " + category['PCP'])
+        }
+        function later(){
+            console.log("함수 밖 실행")
+            console.log("함수 밖 " + category['PCP']);
+            //html로 표현
+            document.getElementById("weather-container").innerHTML =
+            `<div class="weather-box-blur"></div>
+            <div class="weather-box-left">
+                <p>${category["TMP"][1]}</p>
+            </div>
+            <div class="weather-box-right">
+                <div class="weather-box-right-aboveBox">
+                    <span>인천<span>
+                </div>
+                <div class="weather-box-right-underBox">
+                    <span>${category['REH'][1]}</span>
+                    <span>${category['PTY'][1]}</span>
+                    <span>${category['WSD'][1]}</span>
+                </div>
+            </div>
+            `
+        }
+    </script>
+</body>
+
+</html>
