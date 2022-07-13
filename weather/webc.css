@@ -98,8 +98,7 @@ header{
 .weather-box-right-aboveBox{
     position:relative;
     width: 100%;
-    height: 40%;
-    background-color: lightblue;
+    height: 50%;
 }
 .weather-box-right-aboveBox > span{
     position: absolute;
@@ -110,11 +109,9 @@ header{
 }
 .weather-box-right-underBox{
     width: 100%;
-    height: 60%;
-    background-color: white;
+    height: 50%;
     font-size: 14px;
     display: flex;
-}
-.weather-box-right-underBox > span{
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items:flex-start;
 }

@@ -28,6 +28,7 @@
 
     </div>
     <script>
+        
         var date = new Date();
         let bDate, bTime, nx, ny;
         let getCoordinate = prompt("좌표를 입력해주세요 x, y");
@@ -72,51 +73,49 @@
         bDate = getFullYear("year") + getFullYear("month") + getFullYear("date");
         bTime = getFullYear("hour");
         console.log(bTime);
+        console.log(bDate);
         nx = String(getCoordinate.split(',')[0]);
         ny = String(getCoordinate.split(',')[1]);
 
         var xhr = new XMLHttpRequest();
         //원형 url, key원형
+        var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/';
         //api 주소
+        var key = '?' + encodeURIComponent('serviceKey') + '=' +
+        'fxmuF6xaS3Czmrhm6pisu6KhhEyTHeIEXWHh2QrirGHb77vkRYJa2d8d1bb7vxFs4mNGDPL7FEZeeHeaVLC2nA%3D%3D'
         //api key값
         
-        var url3 = url + 'getVilageFcst' //초단기실황조회
+        var url3 = url + 'getUltraSrtNcst' //초단기실황조회
         var key3 = key;
-        key3 += "&" + encodeURIComponent('numOfRows') + '=' + encodeURIComponent(14);
-        key3 += "&" + encodeURIComponent('pageNo') + '=' + encodeURIComponent(1);
-        key3 += "&" + encodeURIComponent('dataType') + '=' + encodeURIComponent('XML');
-        key3 += "&" + encodeURIComponent('base_date') + '=' + encodeURIComponent(bDate);
-        key3 += "&" + encodeURIComponent('base_time') + '=' + encodeURIComponent('1700');
+
+        key3 += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');
+        key3 += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('14');
+        key3 += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('XML');
+        key3 += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent(bDate);
+        key3 += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent(bTime);
         //인천 계양구 계산4동
-        key3 += "&" + encodeURIComponent('nx') + '=' + encodeURIComponent(nx);
-        key3 += "&" + encodeURIComponent('ny') + '=' + encodeURIComponent(ny);
+        key3 += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent(nx);
+        key3 += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent(ny);
 
+        xhr.open('GET', url3 + key3,true);
         xhr.onreadystatechange = function () { //?
-
             if (this.readyState == 4 && this.status == 200) {
-                func(this.responseXML);
+                func(this.responseXML).then(function(value){
+                    innerHtml(value);
+                });
             }
         }
-        xhr.open('GET', url3 + key3, true);
         xhr.send('');
-        
         const category = {
-            POP: ['강수확률',"undefined"],
+            T1H: ['기온', 'undefined'],
+            RN1: ['1시간 강수량',"undefined"],
             PTY: ['강수형태',"undefined"],
-            PCP: ['1시간 강수량',"undefined"],
             REH: ['습도',"undefined"],
-            SNO: ['1시간 신적설', "undefined"],
-            SKY: ['하늘상태', "undefined"],
-            TMP: ['1시간 기온', "undefined"],
-            TMN: ['일 최저기온', "undefined"],
-            TMX: ['일 최고기온', "undefined"],
             UUU: ['풍속(동서성분)', "undefined"],
             VVV: ['풍속(남북성분)', "undefined"],
-            WAV: ['파고', "undefined"],
             VEC: ['풍향', "undefined"],
             WSD: ['풍속', "undefined"],
         }
-
 
         var addCategory = function (ct, value) {
             category[ct][1] = value;// 전역에 있는 카테고리리설트를 쓴다.
@@ -125,40 +124,41 @@
             return Object.keys(name).length;
         }
         
+
         function func(xmlDOM) {
-            console.log("함수 안 실행")
             let item = xmlDOM.getElementsByTagName('item');
-
+            
             for (let i = 0; i < getHeadCount(category); i++) {
-
+                
                 let ct = xmlDOM.getElementsByTagName('category')[i].childNodes[0].nodeValue;//category
-                let fcstValue = xmlDOM.getElementsByTagName('fcstValue')[i].childNodes[0].nodeValue;//fcV
-
+                let fcstValue = xmlDOM.getElementsByTagName('obsrValue')[i].childNodes[0].nodeValue;//fcV
+                
                 addCategory(ct, fcstValue);
             }
-            console.log("함수 안 " + category['PCP'])
+            return new Promise(function(resolve){
+                resolve(category);
+            })
         }
-        function later(){
-            console.log("함수 밖 실행")
-            console.log("함수 밖 " + category['PCP']);
+        function innerHtml(value){
+        //여기서부턴 바로 위 func()함수가 비동기처리되서 건너뛰고 147번줄부터 실행되서 category객체를 이용한 값들이 undefined..
             //html로 표현
             document.getElementById("weather-container").innerHTML =
             `<div class="weather-box-blur"></div>
             <div class="weather-box-left">
-                <p>${category["TMP"][1]}</p>
-            </div>
-            <div class="weather-box-right">
-                <div class="weather-box-right-aboveBox">
-                    <span>인천<span>
+                <p>${value['T1H'][1]}</p>
                 </div>
-                <div class="weather-box-right-underBox">
-                    <span>${category['REH'][1]}</span>
-                    <span>${category['PTY'][1]}</span>
-                    <span>${category['WSD'][1]}</span>
+                <div class="weather-box-right">
+                    <div class="weather-box-right-aboveBox">
+                        <span>인천<span>
+                    </div>
+                    <div class="weather-box-right-underBox">
+                        <span>${value['REH'][1]}</span>
+                        <span>${value['PTY'][1]}</span>
+                        <span>${value['WSD'][1]}</span>
+                    </div>
                 </div>
-            </div>
-            `
-        }
+                `
+            }
     </script>
 </body>
 
