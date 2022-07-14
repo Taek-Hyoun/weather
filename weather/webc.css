@@ -66,11 +66,19 @@ header{
     background-image: linear-gradient(to right, purple 0%, green 50%, red 100%)
 }
 #about{
+    position: relative;
     margin: auto;
     width: 95%;
     height: 60vh;
+}
+#blur-container{
+    position: absolute;
+    width: 100%;
+    height: 60vh;
     filter: blur(3px);
     background-color: rgba(0,0,0,0.2);
+    margin: 0;
+    padding: 0; 
 }
 
 /* javascript 템플릿문법 css 속성 적용 */
@@ -123,4 +131,41 @@ header{
 }
 .weather-box-right-underBox > span{
     color: black;
+}
+#digit-clock-container{
+    width: 250px;
+    height: 70px;
+    display: inline-block;
+}
+#digit-clock-box{
+    display: flex;
+    width: 250px;
+    height: 70px;
+    background-image:  linear-gradient(to left, rgba(51, 255, 132, 0.5), rgba(54, 103, 182, 0.3));   
+    justify-content : center;
+    align-items: center;
+}
+#digit-clock-box > p{
+    color:rgb(255, 255, 255);
+}
+#me{
+    display: inline-block;
+    position: absolute;
+    width: 250px;
+    height: 100%;
+    background-color: lightsalmon;
+}
+#me > #profile-img{
+    width: 100%;
+    height: 40%;
+    background-color: pink;
+}
+#me > #profile-img > img{
+    width: 100%;
+    height: 100%;
+}
+#me > #profile-description{
+    width: 100%;
+    height: 60%;
+    background-image: linear-gradient(to right, rgb(49, 179, 176), rgba(78, 12, 86, 0.1));
 }

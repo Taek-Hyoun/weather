@@ -15,6 +15,7 @@
         <div id="weather-container">
 
         </div>
+        <h1 style="text-align:center;">introduce site</h1>
         <ul class="menu-bar-container">
             <a href="#about"><li class="menu-bar">about</li></a>
             <a href="#"><li class="menu-bar">mylife</li></a>
@@ -25,147 +26,31 @@
         <hr>
     </div>
     <div id="about">
-        
+        <div id="blur-container"></div>
+
+        <div id="digit-clock-container">
+            <div id="digit-clock-box">
+                <p id="demo"></p>
+            </div>
+        </div>
+        <div id="me">
+            <div id="profile-img">
+                <img src="data:image/jpeg;base64,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" alt="">
+            </div>
+            <div id="profile-description">
+                <p>안녕하세요 저는 안철현(가명)이라고 합니다
+                    저는 프론트엔드 개발자를 꿈꾸고 있습니다.
+                    아직까지 부족한 디자인 부족하 프로그래밍이지만 한걸음씩
+                    꿈을 향해 나아가고 있습니다.
+                    대학교 졸업할때 쯤이면 고급 프로그래머가 될겁니다.
+                </p>
+                </pre>
+            </div>
+        </div>
     </div>
-    <script>
-        var date = new Date();
-        let bDate, bTime, nx, ny;
-        let getCoordinate = prompt("좌표를 입력해주세요 x, y");
-
-        function getFullYear(value){
-            let isUnder;
-            if(value == "year"){
-                let year = String(date.getFullYear());
-                return year;
-
-            }else if(value == "month"){//month는 한달씩 늦게 나오므로 +1해줘야한다.
-                let month = date.getMonth() + 1;
-                isUnder = month < 10 ? "0" + month : month;
-                return String(isUnder);
-
-            }else if(value == "date"){
-                let dating = date.getDate();
-                isUnder = dating < 10 ? "0" + dating : dating;
-                return String(isUnder);
-
-            }else if(value == "hour"){
-                let hour = date.getHours(); //10 22
-                let min = date.getMinutes();
-
-                if(hour < 10){
-                    if(min < 40){
-                        return String("0" + hour-1 + "00");
-                    }else{
-                        return String("0" + hour + "00");
-                    }
-                    
-                }else{
-                    if(min < 40){
-                        return String(hour-1 + "00");
-                    }else{
-                        return String(hour + "00");
-                    }
-                }
-            }
-        }
-        
-        bDate = getFullYear("year") + getFullYear("month") + getFullYear("date");
-        bTime = getFullYear("hour");
-        nx = String(getCoordinate.split(',')[0]);
-        ny = String(getCoordinate.split(',')[1]);
-
-        var xhr = new XMLHttpRequest();
-        //원형 url, key원형
-        var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/';
-        //api 주소
-        var key = '?' + encodeURIComponent('serviceKey') + '=' +
-        'fxmuF6xaS3Czmrhm6pisu6KhhEyTHeIEXWHh2QrirGHb77vkRYJa2d8d1bb7vxFs4mNGDPL7FEZeeHeaVLC2nA%3D%3D'
-        //api key값
-        
-        var url3 = url + 'getUltraSrtNcst' //초단기실황조회
-        var key3 = key;
-
-        key3 += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');
-        key3 += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('14');
-        key3 += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('XML');
-        key3 += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent(bDate);
-        key3 += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent(bTime);
-        //인천 계양구 계산4동
-        key3 += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent(nx);
-        key3 += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent(ny);
-
-        xhr.open('GET', url3 + key3,true);
-        xhr.onreadystatechange = function () { //?
-            if (this.readyState == 4 && this.status == 200) {
-                func(this.responseXML).then(function(value){
-                    innerHtml(value);
-                });
-            }
-        }
-        xhr.send('');
-        const category = {
-            T1H: ['기온', 'undefined'],
-            RN1: ['1시간 강수량',"undefined"],
-            PTY: ['강수형태',"undefined"],
-            REH: ['습도',"undefined"],
-            UUU: ['풍속(동서성분)', "undefined"],
-            VVV: ['풍속(남북성분)', "undefined"],
-            VEC: ['풍향', "undefined"],
-            WSD: ['풍속', "undefined"],
-        }
-
-        var addCategory = function (ct, value) {
-            category[ct][1] = value;// 전역에 있는 카테고리리설트를 쓴다.
-        }
-        var getHeadCount = function(name){
-            return Object.keys(name).length;
-        }
-        
-
-        function func(xmlDOM) {
-            let item = xmlDOM.getElementsByTagName('item');
-            
-            for (let i = 0; i < getHeadCount(category); i++) {
-                
-                let ct = xmlDOM.getElementsByTagName('category')[i].childNodes[0].nodeValue;//category
-                let fcstValue = xmlDOM.getElementsByTagName('obsrValue')[i].childNodes[0].nodeValue;//fcV
-                
-                addCategory(ct, fcstValue);
-            }
-            return new Promise(function(resolve){
-                resolve(category);
-            })
-        }
-        const kindOfPTY = {
-            0 : ['없음'],
-            1 : ['비'],
-            2 : ['비/눈'],
-            3 : ['눈'],
-            4 : ['빗방울'],
-            5 : ['빗방울날림'],
-            6 : ['눈날림']
-        }
-        function innerHtml(value){
-        //여기서부턴 바로 위 func()함수가 비동기처리되서 건너뛰고 147번줄부터 실행되서 category객체를 이용한 값들이 undefined..
-            //html로 표현
-            document.getElementById("weather-container").innerHTML =
-            `<div class="weather-box-blur"></div>
-            <div class="weather-box-left">
-                <p>${value['T1H'][1]}도</p>
-                </div>
-                <div class="weather-box-right">
-                    <div class="weather-box-right-aboveBox">
-                        <span>인천 계양구<span>
-                    </div>
-                    <div class="weather-box-right-underBox">
-                        <span>${value['REH'][0]}: ${value['REH'][1]}%</span>
-                        <span>${value['PTY'][0]}: ${kindOfPTY[Number(value['PTY'][1])]}</span>
-                        <span>${value['WSD'][0]}: ${value['WSD'][1]}</span>
-                    </div>
-                </div>
-                `
-            }
-    </script>
+    <script src="webj.js"></script>
+    <script src="digit-clock.js"></script>
+    
 </body>
 
 </html>
