@@ -25,10 +25,9 @@
         <hr>
     </div>
     <div id="about">
-
+        
     </div>
     <script>
-        
         var date = new Date();
         let bDate, bTime, nx, ny;
         let getCoordinate = prompt("좌표를 입력해주세요 x, y");
@@ -72,8 +71,6 @@
         
         bDate = getFullYear("year") + getFullYear("month") + getFullYear("date");
         bTime = getFullYear("hour");
-        console.log(bTime);
-        console.log(bDate);
         nx = String(getCoordinate.split(',')[0]);
         ny = String(getCoordinate.split(',')[1]);
 
@@ -139,22 +136,31 @@
                 resolve(category);
             })
         }
+        const kindOfPTY = {
+            0 : ['없음'],
+            1 : ['비'],
+            2 : ['비/눈'],
+            3 : ['눈'],
+            4 : ['빗방울'],
+            5 : ['빗방울날림'],
+            6 : ['눈날림']
+        }
         function innerHtml(value){
         //여기서부턴 바로 위 func()함수가 비동기처리되서 건너뛰고 147번줄부터 실행되서 category객체를 이용한 값들이 undefined..
             //html로 표현
             document.getElementById("weather-container").innerHTML =
             `<div class="weather-box-blur"></div>
             <div class="weather-box-left">
-                <p>${value['T1H'][1]}</p>
+                <p>${value['T1H'][1]}도</p>
                 </div>
                 <div class="weather-box-right">
                     <div class="weather-box-right-aboveBox">
-                        <span>인천<span>
+                        <span>인천 계양구<span>
                     </div>
                     <div class="weather-box-right-underBox">
-                        <span>${value['REH'][1]}</span>
-                        <span>${value['PTY'][1]}</span>
-                        <span>${value['WSD'][1]}</span>
+                        <span>${value['REH'][0]}: ${value['REH'][1]}%</span>
+                        <span>${value['PTY'][0]}: ${kindOfPTY[Number(value['PTY'][1])]}</span>
+                        <span>${value['WSD'][0]}: ${value['WSD'][1]}</span>
                     </div>
                 </div>
                 `

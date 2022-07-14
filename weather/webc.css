@@ -26,7 +26,7 @@ header{
     margin: 0 auto;
 }
 #weather-container{
-    width: 250px;
+    width: 400px;
     height: 12vh;
     position: absolute;
     top: 50%;
@@ -76,24 +76,30 @@ header{
 /* javascript 템플릿문법 css 속성 적용 */
 .weather-box-blur{
     position: absolute;
-    width: 250px;
+    width: 400px;
     height: 100%;
-    background-color: rgba(0,0,0,0.3);
-    filter: blur(2px);
+    background-image: linear-gradient(to right, rgba(31, 136, 134,0.5),rgba(39, 51, 139, 0.737));
+    filter: blur(4px);
 }
 .weather-box-left, .weather-box-right{
-    width: 125px;
     height: 100%;
     float: left;
 }
 .weather-box-left{
+    width: 38%;
     position: relative;
+}
+.weather-box-right{
+    position:relative;
+    width: 60%;
 }
 .weather-box-left > p{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-size: 22px;
+    color: white;
 }
 .weather-box-right-aboveBox{
     position:relative;
@@ -114,4 +120,7 @@ header{
     display: flex;
     justify-content: space-around;
     align-items:flex-start;
+}
+.weather-box-right-underBox > span{
+    color: black;
 }
