@@ -46,10 +46,7 @@ ny = String(getCoordinate.split(',')[1]);
 
 var xhr = new XMLHttpRequest();
 //원형 url, key원형
-var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/';
-//api 주소
-var key = '?' + encodeURIComponent('serviceKey') + '=' +
-    'fxmuF6xaS3Czmrhm6pisu6KhhEyTHeIEXWHh2QrirGHb77vkRYJa2d8d1bb7vxFs4mNGDPL7FEZeeHeaVLC2nA%3D%3D'
+
 //api key값
 
 var url3 = url + 'getUltraSrtNcst' //초단기실황조회
