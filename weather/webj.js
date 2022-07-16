@@ -1,8 +1,6 @@
 var date = new Date();
-let bDate, bTime, nx, ny;
-let getCoordinate = prompt("좌표를 입력해주세요 x, y");
 
-function getFullYear(value) {
+var getFullYear = function(value) {
     let isUnder;
     if (value == "year") {
         let year = String(date.getFullYear());
@@ -39,6 +37,9 @@ function getFullYear(value) {
     }
 }
 
+let bDate, bTime, nx, ny;
+let getCoordinate = prompt("좌표를 입력해주세요 x, y");
+
 bDate = getFullYear("year") + getFullYear("month") + getFullYear("date");
 bTime = getFullYear("hour");
 nx = String(getCoordinate.split(',')[0]);
@@ -64,7 +65,7 @@ key3 += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent(ny);
 xhr.open('GET', url3 + key3, true);
 xhr.onreadystatechange = function () { //?
     if (this.readyState == 4 && this.status == 200) {
-        func(this.responseXML).then(function (value) {
+        addCategoryValue(this.responseXML).then(function (value) {
             innerHtml(value);
         });
     }
@@ -80,7 +81,6 @@ const category = {
     VEC: ['풍향', "undefined"],
     WSD: ['풍속', "undefined"],
 }
-
 var addCategory = function (ct, value) {
     category[ct][1] = value;// 전역에 있는 카테고리리설트를 쓴다.
 }
@@ -89,7 +89,7 @@ var getHeadCount = function (name) {
 }
 
 
-function func(xmlDOM) {
+function addCategoryValue(xmlDOM) {
     let item = xmlDOM.getElementsByTagName('item');
 
     for (let i = 0; i < getHeadCount(category); i++) {
@@ -100,6 +100,7 @@ function func(xmlDOM) {
         addCategory(ct, fcstValue);
     }
     return new Promise(function (resolve) {
+        console.log(category);
         resolve(category);
     })
 }

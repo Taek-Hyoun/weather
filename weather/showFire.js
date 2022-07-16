@@ -1,3 +1,4 @@
+var dating = new Date();
 
 var xhr = new XMLHttpRequest();
 
@@ -34,7 +35,6 @@ const getOcBysidoFireSmrzPcnd = {
     STN_END_MNB: ['상황종료건수', null],//
 }
 function addValue(key, value) {
-    console.log(key, value);
     getOcBysidoFireSmrzPcnd[key][1] = value;
 }
 function innerHTML(value) {
@@ -48,7 +48,6 @@ function innerHTML(value) {
     //객체에 인천관련 값을 찾아서 저장한다.
     for (let i = 0; i < item.length; i++) {
         if (value.getElementsByTagName('SIDO_NM')[i].childNodes[0].nodeValue == '인천광역시') {
-            console.log(item[i]);
             obj['fire'][0] = value.querySelector('FIRE_RCPT_MNB').tagName//태그네임
             obj['flsrp'][0] = value.querySelector('FLSRP_PRCS_MNB').tagName//태그네임
             obj['slf'][0] = value.querySelector('SLF_EXTSH_MNB').tagName//태그네임
@@ -61,12 +60,17 @@ function innerHTML(value) {
                 let key = Object.keys(obj); //배열로서 키값이 반환된다.
                 addValue(obj[key[i]][0], obj[key[i]][1]);
             }
-            console.log("shit");
         }
 
     }
     document.getElementById('show-weather-container').innerHTML =
         `
-            <h1>인천광역시 화재건수</h1>
+            <h2>인천광역시 화재건수</h2>
+            <h2>${dating}</h2>
+            <div>
+                <p>화재처리건수 : ${getOcBysidoFireSmrzPcnd[obj['fire'][0]][1]}</p>
+                <p>오보처리건수 : ${getOcBysidoFireSmrzPcnd[obj['flsrp'][0]][1]}</p>
+                <p>자체진화건수 : ${getOcBysidoFireSmrzPcnd[obj['slf'][0]][1]}</p>
+            </div>
         `
 }
